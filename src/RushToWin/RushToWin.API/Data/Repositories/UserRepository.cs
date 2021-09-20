@@ -24,6 +24,12 @@ namespace RushToWin.API.Data.Repositories
             return user;
         }
 
+        public async Task<User> Get(string email)
+        {
+            var user = await _context.Users.FindAsync(email);
+            return user;
+        }
+
         public async Task<User> Insert(User user)
         {
             _context.Users.Add(user);

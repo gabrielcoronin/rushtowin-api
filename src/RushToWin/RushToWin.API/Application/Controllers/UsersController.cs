@@ -53,6 +53,8 @@ namespace RushToWin.API.Application.Controllers
 
             var result = await _userService.Insert(user);
 
+            if (!result.Success) return BadRequest(result.Messages);
+
             return Ok(result);
         }
 

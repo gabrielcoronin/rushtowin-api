@@ -1,6 +1,7 @@
 ﻿using RushToWin.API.Domain.Entities;
 using RushToWin.API.Domain.Interfaces.Repositories;
 using RushToWin.API.Domain.Interfaces.Services;
+using RushToWin.Domain.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,15 +28,21 @@ namespace RushToWin.API.Domain.Services
             return user;
         }
 
-        public async Task<User> Insert(User entity)
+        public async Task<Notification> Insert(User entity)
         {
+            if (_userRepository.Get(entity.Email) != null) 
+                return Notification.CreateError(message: "Email já cadastrado.", statusCode: 400);
+
             entity.Wallet = new Wallet() 
             { 
                 Id = Guid.NewGuid(), 
                 Balance = 0.0, 
-            };
+            };        
 
-            return await _userRepository.Insert(entity);
+            var user = await _userRepository.Insert(entity);
+
+            return Notification.CreateSuccess(user, null, 200, "Usuário criado com sucesso");
+
         }
 
         public async Task<User> Login(string email, string password)
