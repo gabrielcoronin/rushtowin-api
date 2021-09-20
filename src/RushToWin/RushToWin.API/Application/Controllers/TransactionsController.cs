@@ -62,8 +62,8 @@ namespace RushToWin.API.Application.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transaction>>> List([FromQuery] string walletId)
+        [HttpGet("{walletId}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> List(string walletId)
         {
             var result = await _transactionService.List(Guid.Parse(walletId));
             return Ok(result);
