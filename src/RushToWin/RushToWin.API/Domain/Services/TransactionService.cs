@@ -1,6 +1,7 @@
 ﻿using RushToWin.API.Domain.Entities;
 using RushToWin.API.Domain.Interfaces.Repositories;
 using RushToWin.API.Domain.Interfaces.Services;
+using RushToWin.Domain.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -42,13 +43,13 @@ namespace RushToWin.API.Domain.Services
         public async Task<Transaction> Recharge(double value, Guid id)
         {
             var wallet = await _walletRepository.Get(id);
-            var transaction = new Transaction() 
-            { 
-              Id = Guid.NewGuid(),
-              CreatedAt = new DateTime(),
-              Value = value,
-              Wallet = wallet
-            };            
+            var transaction = new Transaction()
+            {
+                Id = Guid.NewGuid(),
+                CreatedAt = DateTime.UtcNow,
+                Value = value,
+                Wallet = wallet
+            };
 
             var entity = await _transactionRepository.Insert(transaction);
 
@@ -59,13 +60,16 @@ namespace RushToWin.API.Domain.Services
         }
 
 
-        public async Task<Transaction> Bus(Guid id)
+        public async Task<Notification> Bus(Guid id)
         {
             var wallet = await _walletRepository.Get(id);
+
+            if (wallet.Balance <= 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(),
+                CreatedAt = DateTime.UtcNow,
                 Value = 5.00,
                 Wallet = wallet
             };
@@ -73,19 +77,24 @@ namespace RushToWin.API.Domain.Services
             var entity = await _transactionRepository.Insert(transaction);
 
             wallet.Balance -= transaction.Value;
-            
+
+            if (wallet.Balance < 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             await _walletRepository.Update(wallet);
 
-            return entity;
+            return Notification.CreateSuccess(entity, null, 200, "");
         }
 
-        public async Task<Transaction> Subway(Guid id)
+        public async Task<Notification> Subway(Guid id)
         {
             var wallet = await _walletRepository.Get(id);
+
+            if (wallet.Balance <= 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(),
+                CreatedAt = DateTime.UtcNow,
                 Value = 6.00,
                 Wallet = wallet
             };
@@ -93,20 +102,25 @@ namespace RushToWin.API.Domain.Services
             var entity = await _transactionRepository.Insert(transaction);
 
             wallet.Balance -= transaction.Value;
-            
+
+            if (wallet.Balance < 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             await _walletRepository.Update(wallet);
 
-            return entity;
+            return Notification.CreateSuccess(entity, null, 200, "");
 
         }
 
-        public async Task<Transaction> Train(Guid id)
+        public async Task<Notification> Train(Guid id)
         {
             var wallet = await _walletRepository.Get(id);
+
+            if (wallet.Balance <= 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(),
+                CreatedAt = DateTime.UtcNow,
                 Value = 7.00,
                 Wallet = wallet
             };
@@ -114,11 +128,12 @@ namespace RushToWin.API.Domain.Services
             var entity = await _transactionRepository.Insert(transaction);
 
             wallet.Balance -= transaction.Value;
-            
+
+            if (wallet.Balance < 0) return Notification.CreateError(message: "Não há dinheiro suficiente. Faça a recarga e tente novamente.");
+
             await _walletRepository.Update(wallet);
 
-            return entity;
-            
+            return Notification.CreateSuccess(entity, null, 200, "");
         }
     }
 }

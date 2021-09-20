@@ -33,7 +33,10 @@ namespace RushToWin.API.Application.Controllers
         public async Task<ActionResult<Transaction>> Bus([FromBody] string walletId)
         {
             var result = await _transactionService.Bus(Guid.Parse(walletId));
-            return Ok(result);
+
+            if (!result.Success) return BadRequest(result.Messages);
+
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -41,7 +44,10 @@ namespace RushToWin.API.Application.Controllers
         public async Task<ActionResult<Transaction>> Subway([FromBody] string walletId)
         {
             var result = await _transactionService.Subway(Guid.Parse(walletId));
-            return Ok(result);
+
+            if (!result.Success) return BadRequest(result.Messages);
+
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -49,7 +55,10 @@ namespace RushToWin.API.Application.Controllers
         public async Task<ActionResult<Transaction>> Train([FromBody] string walletId)
         {
             var result = await _transactionService.Train(Guid.Parse(walletId));
-            return Ok(result);
+
+            if (!result.Success) return BadRequest(result.Messages);
+
+            return Ok(result.Data);
         }
 
 
