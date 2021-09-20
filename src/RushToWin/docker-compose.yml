@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  rushtowin.api:
+    image: ${DOCKER_REGISTRY-}rushtowinapi
+    build:
+      context: .
+      dockerfile: RushToWin.API/Dockerfile
