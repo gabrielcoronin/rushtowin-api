@@ -10,15 +10,21 @@ namespace RushToWin.API.Domain.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IWalletRepository _walletRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IWalletRepository walletRepository)
         {
             _userRepository = userRepository;
+            _walletRepository = walletRepository;
         }
 
         public async Task<User> Get(Guid id)
         {
-            return await _userRepository.Get(id);
+            var user = await _userRepository.Get(id);
+            var wallet = await _walletRepository.Get(user.WalletId);
+            user.Wallet = wallet;
+
+            return user;
         }
 
         public async Task<User> Insert(User entity)
@@ -41,7 +47,7 @@ namespace RushToWin.API.Domain.Services
             user.CPF = entity.CPF;
             user.Email = entity.Email;
             user.Password = entity.Password;
-            user.UpdatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.UtcNow;
 
             return await _userRepository.Update(user);
         }

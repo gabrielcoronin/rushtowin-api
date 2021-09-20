@@ -6,7 +6,7 @@ using RushToWin.API.Domain.Interfaces.Repositories;
 using RushToWin.API.Domain.Interfaces.Services;
 using RushToWin.API.Domain.Services;
 
-namespace RushToWin.API.Configuration
+namespace RushToWin.API.Application.Configuration
 {
     public static class DependencyInjectionConfig
     {

@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RushToWin.API.Configuration;
+using RushToWin.API.Application.Configuration;
 using RushToWin.API.Data.Context;
 using System;
 
-namespace RushToWin.API
+namespace RushToWin.API.Application
 {
     public class Startup
     {
