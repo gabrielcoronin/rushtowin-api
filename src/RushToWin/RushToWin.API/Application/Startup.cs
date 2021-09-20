@@ -55,8 +55,6 @@ namespace RushToWin.API.Application
                 context.Database.Migrate();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
