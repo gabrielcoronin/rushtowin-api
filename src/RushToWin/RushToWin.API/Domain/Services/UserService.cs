@@ -29,14 +29,21 @@ namespace RushToWin.API.Domain.Services
 
         public async Task<User> Insert(User entity)
         {
-            var wallet = new Wallet() 
+            entity.Wallet = new Wallet() 
             { 
                 Id = Guid.NewGuid(), 
                 Balance = 0.0, 
             };
 
-            entity.Wallet = wallet;
             return await _userRepository.Insert(entity);
+        }
+
+        public async Task<User> Login(string email, string password)
+        {
+            var user = await _userRepository.Login(email, password);
+            user.Wallet = await _walletRepository.Get(user.WalletId);
+
+            return user;
         }
 
         public async Task<User> Update(User entity)

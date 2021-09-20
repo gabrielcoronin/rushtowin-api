@@ -8,6 +8,7 @@ namespace RushToWin.API.Domain.Interfaces.Repositories
     {
         Task<User> Insert(User entity);
         Task<User> Get(Guid id);
+        Task<User> Login(string email, string password);
         Task<User> Update(User entity);
     }
 }

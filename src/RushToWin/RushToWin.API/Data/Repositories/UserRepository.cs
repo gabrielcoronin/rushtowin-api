@@ -4,6 +4,7 @@ using RushToWin.API.Domain.Entities;
 using RushToWin.API.Domain.Interfaces.Repositories;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RushToWin.API.Data.Repositories
 {
@@ -28,6 +29,15 @@ namespace RushToWin.API.Data.Repositories
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<User> Login(string email, string password)
+        {
+            var entity = (from _user in _context.Users
+                         where _user.Email == email && _user.Password == password
+                         select _user).SingleOrDefaultAsync();
+
+            return await entity;
         }
 
         public async Task<User> Update(User user)

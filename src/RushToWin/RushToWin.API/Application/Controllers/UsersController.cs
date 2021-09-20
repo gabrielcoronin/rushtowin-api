@@ -25,6 +25,17 @@ namespace RushToWin.API.Application.Controllers
             return Ok(result);
         }
 
+        [HttpGet()]
+        [Route("login")]
+        public async Task<ActionResult<User>> Login([FromBody] LoginModel model)
+        {    
+            var result = await _userService.Login(model.Email, model.Password);
+
+            if (result == null) return BadRequest();
+
+            return Ok(result);
+        }
+
         // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> Post([FromBody] UserInsertModel model)
