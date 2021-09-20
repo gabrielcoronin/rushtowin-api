@@ -18,8 +18,8 @@ namespace RushToWin.API.Application.Controllers
             _userService = userService;
         }
 
-        [HttpGet()]
-        public async Task<ActionResult<User>> Get([FromQuery] Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> Get(Guid id)
         {
             var result = await _userService.Get(id);
             return Ok(result);
