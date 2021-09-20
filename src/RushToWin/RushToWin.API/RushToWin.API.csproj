@@ -27,9 +27,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Configuration\" />
-    <Folder Include="Data\Repositories\" />
-    <Folder Include="Domain\Interfaces\Services\" />
-    <Folder Include="Domain\Interfaces\Repositories\" />
     <Folder Include="Domain\Services\" />
   </ItemGroup>
 
