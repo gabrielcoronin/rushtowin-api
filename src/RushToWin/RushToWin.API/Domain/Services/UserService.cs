@@ -30,8 +30,8 @@ namespace RushToWin.API.Domain.Services
 
         public async Task<Notification> Insert(User entity)
         {
-            if (_userRepository.Get(entity.Email) != null) 
-                return Notification.CreateError(message: "Email já cadastrado.", statusCode: 400);
+            var email = _userRepository.Get(entity.Email);
+            if (email != null) return Notification.CreateError(message: "Email já cadastrado.", statusCode: 400);
 
             entity.Wallet = new Wallet() 
             { 
