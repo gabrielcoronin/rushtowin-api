@@ -59,7 +59,7 @@ namespace RushToWin.API.Domain.Services
                 }
             }
 
-            return result;
+            return result.OrderByDescending(c => c.CreatedAt);
         }
 
 
@@ -69,7 +69,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.now,
                 Value = value,
                 Wallet = wallet
             };
@@ -92,7 +92,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.now,
                 Value = 5.00,
                 Wallet = wallet
             };
@@ -117,7 +117,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.now,
                 Value = 6.00,
                 Wallet = wallet
             };
@@ -143,7 +143,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.now,
                 Value = 7.00,
                 Wallet = wallet
             };
