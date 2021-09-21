@@ -20,6 +20,10 @@ namespace RushToWin.API.Domain.Services
             _walletRepository = walletRepository;
         }
 
+        public async Task<Wallet> Get(Guid id)
+        {
+           return await _walletRepository.Get(id);
+        }
 
         public async Task<IEnumerable<Transaction>> List(Guid id)
         {
@@ -135,5 +139,7 @@ namespace RushToWin.API.Domain.Services
 
             return Notification.CreateSuccess(entity, null, 200, "");
         }
+
+      
     }
 }
