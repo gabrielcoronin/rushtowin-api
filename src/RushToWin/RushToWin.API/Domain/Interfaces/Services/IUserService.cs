@@ -11,5 +11,7 @@ namespace RushToWin.API.Domain.Interfaces.Services
         Task<User> Get(Guid id);
         Task<User> Login(string email, string password);
         Task<User> Update(User entity);
+        Task<User> UpdatePassword(Guid Id, string password);
+
     }
 }

@@ -61,7 +61,17 @@ namespace RushToWin.API.Domain.Services
             user.CPF = entity.CPF;
             user.Email = entity.Email;
             user.Password = entity.Password;
-            user.UpdatedAt = DateTime.UtcNow;
+            user.UpdatedAt = DateTime.Now;
+
+            return await _userRepository.Update(user);
+        }
+
+        public async Task<User> UpdatePassword(Guid id, string password)
+        {
+            var user = await _userRepository.Get(id);
+                        
+            user.Password = password;
+            user.UpdatedAt = DateTime.Now;
 
             return await _userRepository.Update(user);
         }

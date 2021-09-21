@@ -26,10 +26,10 @@ namespace RushToWin.API.Application.Controllers
         }
 
         [HttpGet()]
-        [Route("login")]
-        public async Task<ActionResult<User>> Login([FromBody] LoginModel model)
+        [Route("login/{email}/{password}")]
+        public async Task<ActionResult<User>> Login(string email, string password)
         {    
-            var result = await _userService.Login(model.Email, model.Password);
+            var result = await _userService.Login(email, password);
 
             if (result == null) return BadRequest();
 
@@ -77,6 +77,14 @@ namespace RushToWin.API.Application.Controllers
             return Ok(result);
         }
 
-      
+        [HttpPut("updatePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePassword model)
+        {
+            var result = await _userService.UpdatePassword(Guid.Parse(model.Id), model.Password);
+
+            return Ok(result);
+        }
+
+
     }
 }
