@@ -4,6 +4,7 @@ using RushToWin.API.Domain.Interfaces.Services;
 using RushToWin.Domain.Notifications;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RushToWin.API.Domain.Services
@@ -23,6 +24,24 @@ namespace RushToWin.API.Domain.Services
         public async Task<Wallet> Get(Guid id)
         {
            return await _walletRepository.Get(id);
+        }
+
+        public async Task<Transaction> GetLastTransaction(Guid id)
+        {
+            var wallet = await _walletRepository.Get(id);
+            var list = await _transactionRepository.List();
+
+            var result = new List<Transaction>();
+
+            foreach (var t in list)
+            {
+                if (t.Wallet == wallet)
+                {
+                    result.Add(t);
+                }
+            }
+
+            return result.OrderByDescending(result => result.CreatedAt).FirstOrDefault();
         }
 
         public async Task<IEnumerable<Transaction>> List(Guid id)
@@ -140,6 +159,6 @@ namespace RushToWin.API.Domain.Services
             return Notification.CreateSuccess(entity, null, 200, "");
         }
 
-      
+
     }
 }

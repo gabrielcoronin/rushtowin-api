@@ -75,5 +75,12 @@ namespace RushToWin.API.Application.Controllers
             var result = await _transactionService.Get(Guid.Parse(walletId));
             return Ok(result);
         }
+
+        [HttpGet("lastTransaction/{walletId}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> LastTransaction(string walletId)
+        {
+            var result = await _transactionService.GetLastTransaction(Guid.Parse(walletId));
+            return Ok(result);
+        }
     }
 }

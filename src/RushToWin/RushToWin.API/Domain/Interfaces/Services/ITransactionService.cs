@@ -9,6 +9,7 @@ namespace RushToWin.API.Domain.Interfaces.Services
     public interface ITransactionService
     {
         Task<Wallet> Get(Guid id);
+        Task<Transaction> GetLastTransaction(Guid id);
         Task<IEnumerable<Transaction>> List(Guid id);
         Task<Transaction> Recharge(double value, Guid id);
         Task<Notification> Bus(Guid id);
