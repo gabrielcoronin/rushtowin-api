@@ -29,8 +29,8 @@ namespace RushToWin.API.Application.Controllers
         }
 
         [HttpPost]
-        [Route("bus")]
-        public async Task<ActionResult<Transaction>> Bus([FromBody] string walletId)
+        [Route("bus/{walletId}")]
+        public async Task<ActionResult<Transaction>> Bus(string walletId)
         {
             var result = await _transactionService.Bus(Guid.Parse(walletId));
 
@@ -40,8 +40,8 @@ namespace RushToWin.API.Application.Controllers
         }
 
         [HttpPost]
-        [Route("subway")]
-        public async Task<ActionResult<Transaction>> Subway([FromBody] string walletId)
+        [Route("subway/{walletId}")]
+        public async Task<ActionResult<Transaction>> Subway(string walletId)
         {
             var result = await _transactionService.Subway(Guid.Parse(walletId));
 
@@ -51,8 +51,8 @@ namespace RushToWin.API.Application.Controllers
         }
 
         [HttpPost]
-        [Route("train")]
-        public async Task<ActionResult<Transaction>> Train([FromBody] string walletId)
+        [Route("train/{walletId}")]
+        public async Task<ActionResult<Transaction>> Train(string walletId)
         {
             var result = await _transactionService.Train(Guid.Parse(walletId));
 

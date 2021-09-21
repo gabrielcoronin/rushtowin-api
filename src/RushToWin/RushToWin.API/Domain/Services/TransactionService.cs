@@ -69,7 +69,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.now,
+                CreatedAt = DateTime.Now,
                 Value = value,
                 Wallet = wallet
             };
@@ -92,7 +92,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.now,
+                CreatedAt = DateTime.Now,
                 Value = 5.00,
                 Wallet = wallet
             };
@@ -117,7 +117,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.now,
+                CreatedAt = DateTime.Now,
                 Value = 6.00,
                 Wallet = wallet
             };
@@ -143,7 +143,7 @@ namespace RushToWin.API.Domain.Services
             var transaction = new Transaction()
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.now,
+                CreatedAt = DateTime.Now,
                 Value = 7.00,
                 Wallet = wallet
             };
