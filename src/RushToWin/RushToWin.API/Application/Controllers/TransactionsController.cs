@@ -24,8 +24,8 @@ namespace RushToWin.API.Application.Controllers
         [Route("recharge")]
         public async Task<ActionResult<Transaction>> Recharge([FromBody] RechargeModel model)
         {
-            var result = await _transactionService.Recharge(model.Value, model.WalletId);
-            return Ok(result);
+            await _transactionService.Recharge(model.Value, model.WalletId);
+            return Ok();
         }
 
         [HttpPost]

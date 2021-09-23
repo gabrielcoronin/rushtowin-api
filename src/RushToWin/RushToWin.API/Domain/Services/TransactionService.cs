@@ -63,23 +63,12 @@ namespace RushToWin.API.Domain.Services
         }
 
 
-        public async Task<Transaction> Recharge(double value, Guid id)
+        public async Task Recharge(double value, Guid id)
         {
             var wallet = await _walletRepository.Get(id);
-            var transaction = new Transaction()
-            {
-                Id = Guid.NewGuid(),
-                CreatedAt = DateTime.Now,
-                Value = value,
-                Wallet = wallet
-            };
-
-            var entity = await _transactionRepository.Insert(transaction);
 
             wallet.Balance += value;
             await _walletRepository.Update(wallet);
-
-            return entity;
         }
 
 
