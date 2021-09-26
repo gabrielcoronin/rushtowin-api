@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>bcf43b0c-67df-438b-8095-55366b8eeb3b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>http://localhost:8080/swagger</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:9898/swagger</DockerServiceUrl>
     <DockerServiceName>rushtowin.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

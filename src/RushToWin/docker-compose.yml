@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: RushToWin.API/Dockerfile
     ports:
-      - "8080:80"  
+      - "9898:80"  
       - "5000:443"    
 
 
